@@ -14,6 +14,29 @@ fis.config.merge({
         lint : {
             js : 'jshint'
         }
+    },
+    settings : {
+        lint : {
+            jshint : {
+                //ignored some files
+                //ignored : 'static/libs/**.js',
+                ignored : [ 'static/libs/**.js', /jquery\.js$/i ],
+                
+                //jshint options
+                camelcase : true,
+                curly : true,
+                eqeqeq : true,
+                forin : true,
+                immed : true,
+                latedef : true,
+                newcap : true,
+                noarg : true,
+                noempty : true
+                node : true,
+            }
+        }
     }
 });
 ```
+
+more [options](http://jshint.com/docs/options/)
