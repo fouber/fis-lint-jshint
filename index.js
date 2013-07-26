@@ -6,7 +6,7 @@
 'use strict';
 
 var JSHINT = require("jshint").JSHINT;
-var ignored;
+var ignored, globals;
 
 module.exports = function(content, file, conf){
 	if(conf.ignored){
@@ -17,11 +17,15 @@ module.exports = function(content, file, conf){
         }
 		delete conf.ignored;
 	}
+    if(conf.globals){
+        globals = conf.globals;
+        delete conf.globals;
+    }
     for(var i = 0, len = ignored.length; i < len; i++){
         if(fis.util.filter(file.subpath, ignored[i])) return;
     }
     delete conf.filename;
-    if(!JSHINT(content, conf, conf.globals)){
+    if(!JSHINT(content, conf, globals)){
         JSHINT.errors.forEach(function(err){
             var msg = 'lint.jshint : ' + err.reason + ' [' + file.subpath + ':' + err.line + ':' + err.character + ']';
             fis.log.warning(msg);
