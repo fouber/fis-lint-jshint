@@ -1,7 +1,7 @@
 {
     "name" : "fis-lint-jshint",
     "description" : "A lint plugin for fis to validate js file.",
-    "version" : "0.0.3",
+    "version" : "0.0.4",
     "author" : "FIS Team <fis@baidu.com>",
     "homepage" : "http://fis.baidu.com/",
     "keywords": [ "fis", "jshint" ],
@@ -17,6 +17,6 @@
         "test" : "mocha test/ut --recursive"
     },
     "dependencies" : {
-        "jshint" : "2.1.4"
+        "jshint" : "2.1.9"
     }
 }
