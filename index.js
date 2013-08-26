@@ -26,6 +26,7 @@ var po = {
         "Avoid \\'." : "避免 \\",
         "Avoid \\v." : "避免 \\v",
         "Avoid \\x-." : "避免 \\x-",
+        "Use '===' to compare with 'null'." : "使用`==='来判断是否等于`null'",
         "Bad escapement." : "错误的转义字符",
         "Bad number `{a}'." : "错误的数字 `{a}'",
         "Missing space after `{a}'." : "在'{a}'之后缺少空格",
@@ -147,10 +148,11 @@ module.exports = function(content, file, conf){
     }
     delete conf.filename;
     if(!JSHINT(content, conf, globals)){
-        JSHINT.errors.forEach(function(err){
+        var errors = JSHINT.data().errors;
+        for(var j = 0, err; err = errors[j]; j++){
             var reason = i18n[err.reason] || err.reason;
             var msg = 'lint.jshint : ' + reason + ' [' + file.subpath + ':' + err.line + ':' + err.character + ']';
             fis.log.warning(msg);
-        });
+        }
     }
 };
