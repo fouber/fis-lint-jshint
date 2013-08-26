@@ -22,6 +22,9 @@ fis.config.merge({
                 //ignored : 'static/libs/**.js',
                 ignored : [ 'static/libs/**.js', /jquery\.js$/i ],
                 
+                //using Chinese reporter
+                i18n : 'zh-CN',
+                
                 //jshint options
                 camelcase : true,
                 curly : true,
