@@ -152,7 +152,11 @@ module.exports = function(content, file, conf){
         for(var j = 0, err; err = errors[j]; j++){
             var reason = i18n[err.reason] || err.reason;
             var msg = 'lint.jshint : ' + reason + ' [' + file.subpath + ':' + err.line + ':' + err.character + ']';
-            fis.log.warning(msg);
+            if(err.code[0] === 'E'){
+                fis.log.error(msg);
+            } else {
+                fis.log.warning(msg);
+            }
         }
     }
 };
