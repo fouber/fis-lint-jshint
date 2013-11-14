@@ -5,6 +5,7 @@
 
 'use strict';
 
+var messages = require('./node_modules/jshint/src/messages.js');
 var JSHINT = require("jshint").JSHINT;
 var ignored, globals, i18n = {};
 var po = {
@@ -26,7 +27,7 @@ var po = {
         "Avoid \\'." : "避免 \\",
         "Avoid \\v." : "避免 \\v",
         "Avoid \\x-." : "避免 \\x-",
-        "Use '===' to compare with 'null'." : "使用`==='来判断是否等于`null'",
+        "Use '{a}' to compare with '{b}'." : "使用'{a}'与'{b}'比较",
         "Bad escapement." : "错误的转义字符",
         "Bad number `{a}'." : "错误的数字 `{a}'",
         "Missing space after `{a}'." : "在'{a}'之后缺少空格",
@@ -67,6 +68,7 @@ var po = {
         "Read only.":"只读的属性",
         "`{a}' is a function.":"`{a}'是一个函数",
         "Bad assignment." : "错误的赋值",
+        "Did you mean to return a conditional instead of an assignment?" : "你是否想返回条件判断结果，而不是赋值运算?",
         "Do not assign to the exception parameter.":"不要给额外的参数赋值",
         "Expected an identifier in an assignment and instead saw a function invocation.":"在赋值的语句中需要有一个标识符，而不是一个方法的调用",
         "Expected an identifier and instead saw `{a}' (a reserved word).":"需要有一个标识符，而不是'{a}'(保留字符)",
@@ -91,7 +93,7 @@ var po = {
         "Variables should not be deleted.":"变量需要被删除",
         "Use the object literal notation {}.":"使用对象的文字符号 {}",
         "Do not use {a} as a constructor.":"不要使用{a}作为一个构造对象",
-        "The Function constructor is eval.":"The Function constructor is eval.",
+        "The Function constructor is a form of eval.":"函数构造器是一种eval语句.",
         "A constructor name should start with an uppercase letter.":"一个构造对象的名称必须用大写字母开头.",
         "Bad constructor.":"错误的构造对象",
         "Weird construction. Delete `new'.":"构造对象有误，请删除'new'",
@@ -142,8 +144,22 @@ module.exports = function(content, file, conf){
         globals = conf.globals;
         delete conf.globals;
     }
-    if(conf.i18n){
-        i18n = po[conf.i18n] || {};
+    if(conf.i18n && po[conf.i18n]){
+        fis.util.map(messages.errors, function(code, msg){
+            if(po[conf.i18n][msg.desc]){
+                msg.desc = po[conf.i18n][msg.desc]
+            }
+        });
+        fis.util.map(messages.info, function(code, msg){
+            if(po[conf.i18n][msg.desc]){
+                msg.desc = po[conf.i18n][msg.desc]
+            }
+        });
+        fis.util.map(messages.warnings, function(code, msg){
+            if(po[conf.i18n][msg.desc]){
+                msg.desc = po[conf.i18n][msg.desc]
+            }
+        });
         delete conf.i18n;
     }
     delete conf.filename;
@@ -160,3 +176,7 @@ module.exports = function(content, file, conf){
         }
     }
 };
+
+//module.exports.defaultOptions = {
+//    maxerr : 100
+//};
