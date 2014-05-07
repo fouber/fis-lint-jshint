@@ -34,8 +34,8 @@ fis.config.merge({
                 latedef : true,
                 newcap : true,
                 noarg : true,
-                noempty : true
-                node : true,
+                noempty : true,
+                node : true
             }
         }
     }
