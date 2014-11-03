@@ -11,7 +11,7 @@ A lint plugin for fis to validate js file.
 //configure plugin
 fis.config.set('modules.lint.js', 'jshint');
 //configure plugin settings
-fis.cofnig.set('settings.lint.jshint', {
+fis.config.set('settings.lint.jshint', {
     //ignored some files
     //ignored : 'static/libs/**.js',
     ignored : [ 'static/libs/**.js', /jquery\.js$/i ],
