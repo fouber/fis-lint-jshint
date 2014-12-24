@@ -167,8 +167,7 @@ module.exports = function(content, file, conf){
         var errors = JSHINT.data().errors;
         for(var j = 0, err; err = errors[j]; j++){
             var reason = i18n[err.reason] || err.reason;
-            // console.log(err);
-            var msg = 'lint.jshint : ' + reason + ' [' + file.subpath + ':' + err.line + ':' + err.character + ':' + err.code +']';
+            var msg = 'lint.jshint : ' + reason + ' [' + file.subpath + ':' + err.line + ':' + err.character + ':' + err.code + ']';
             if(err.code[0] === 'E'){
                 fis.log.error(msg);
             } else {
