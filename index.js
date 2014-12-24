@@ -19,7 +19,7 @@ var po = {
         "Line too long.": "本行中的字符超过设定的最大长度.",
         "Trailing whitespace.": "本行末尾有过多无用空格.",
         "Script URL." : "脚本URL.",
-        "Unexpected {a} in '{b}'." : "在 '{b}' 中不该出现 {a}.",
+        "Unexpected '{a}' in '{b}'." : "在 '{b}' 中不该出现 {a}.",
         "Unexpected '{a}'." : "不该在此出现'{a}'.",
         "Strings must use doublequote." : "字符串需要用双引号",
         "Unnecessary escapement." : "不需要转义",
@@ -27,7 +27,7 @@ var po = {
         "Avoid \\'." : "避免 \\",
         "Avoid \\v." : "避免 \\v",
         "Avoid \\x-." : "避免 \\x-",
-        "Use '{a}' to compare with '{b}'." : "使用'{a}'与'{b}'比较",
+        "Use {a}' to compare with '{b}'." : "使用'{a}'与'{b}'比较",
         "Bad escapement." : "错误的转义字符",
         "Bad number '{a}'." : "错误的数字 '{a}'",
         "Missing space after '{a}'." : "在'{a}'之后缺少空格",
@@ -167,7 +167,8 @@ module.exports = function(content, file, conf){
         var errors = JSHINT.data().errors;
         for(var j = 0, err; err = errors[j]; j++){
             var reason = i18n[err.reason] || err.reason;
-            var msg = 'lint.jshint : ' + reason + ' [' + file.subpath + ':' + err.line + ':' + err.character + ']';
+            // console.log(err);
+            var msg = 'lint.jshint : ' + reason + ' [' + file.subpath + ':' + err.line + ':' + err.character + ':' + err.code +']';
             if(err.code[0] === 'E'){
                 fis.log.error(msg);
             } else {
