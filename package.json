@@ -17,6 +17,6 @@
         "test" : "mocha test/ut --recursive"
     },
     "dependencies" : {
-        "jshint" : "2.5.1"
+        "jshint" : "2.5.11"
     }
 }
